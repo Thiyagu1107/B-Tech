@@ -537,19 +537,26 @@
 
         <!-- Contact Form -->
         <div class="glass-panel contact-form-panel">
-          <form class="contact-form" id="enquiryForm">
+          <form class="contact-form" id="enquiryForm" action="https://api.web3forms.com/submit" method="POST">
+            <!-- Web3Forms Access Key & Config -->
+            <input type="hidden" name="access_key" value="f9943dc8-57d9-441b-9340-7e05157e1f9a">
+            <input type="hidden" name="subject" value="New Student Admission Enquiry - B-Tech Computer Education">
+            <input type="hidden" name="from_name" value="B-Tech Website">
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
             <div class="form-group">
               <label for="studentName" class="form-label">Full Name</label>
-              <input type="text" id="studentName" class="form-input" placeholder="e.g. Your Name" required>
+              <input type="text" name="name" id="studentName" class="form-input" placeholder="e.g. Your Name" required>
             </div>
             <div class="form-group">
               <label for="studentPhone" class="form-label">Phone Number</label>
-              <input type="tel" id="studentPhone" class="form-input" placeholder="10-digit Mobile Number"
-                pattern="[0-9]{10}" required>
+              <input type="tel" name="phone" id="studentPhone" class="form-input" placeholder="10-digit Mobile Number"
+                pattern="[0-9]{10}" maxlength="10" inputmode="numeric" autocomplete="tel" required>
+              <span class="form-error" id="phoneError" style="display: none;"></span>
             </div>
             <div class="form-group">
               <label for="selectedCourse" class="form-label">Select Course Category</label>
-              <select id="selectedCourse" class="form-select" required>
+              <select name="course" id="selectedCourse" class="form-select" required>
                 <option value="" disabled selected>Choose a Category...</option>
                 <option value="Software Training">Software Training Course</option>
                 <option value="Computer & Accounting">Computer & Accounting Course</option>
@@ -558,11 +565,13 @@
             </div>
             <div class="form-group">
               <label for="enquiryMessage" class="form-label">Message / Query (Optional)</label>
-              <textarea id="enquiryMessage" class="form-textarea"
+              <textarea name="message" id="enquiryMessage" class="form-textarea"
                 placeholder="Tell us about your learning goals..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem; justify-content: center;">Send
-              Enquiry <i class="fa-solid fa-paper-plane"></i></button>
+            <button type="submit" id="submitBtn" class="btn btn-primary" style="margin-top: 0.5rem; justify-content: center;">
+              <span id="submitBtnText">Send Enquiry</span> <i class="fa-solid fa-paper-plane" id="submitBtnIcon"></i>
+            </button>
+            <div id="formStatusMsg" class="form-status-msg" style="display: none;"></div>
           </form>
         </div>
       </div>
